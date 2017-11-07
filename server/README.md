@@ -142,12 +142,12 @@ It runs by default on the `http://localhost:8080/api/v1`.
 
 ## Things to improve/do
 
-- Improve the logs: Instead of only having Elasticsearch populated with the logs, we could use the ELK(Elasticsearch, Logstash and Kibana) solution to provide a better visualization of logs, and perhaps metrics.
-
-- Create a queue(RabbitMQ or Kafka) to store logs in a safer way. A queue would also be useful to send notifications.
-
-- Create Login Authentication and a userId property in the TODO Model.
+- Tests for Todo Model/Logic(we only have some for Users) and improve User tests.
 
 - Use UUID instead of Long as the main ID of all models.
 
-- Create proper URL prefix(/api/v1) for all endpoints.
+- Create Login Authentication and a userId property in the TODO Model.
+
+- Improve the logs: Instead of only having Elasticsearch populated with the logs, we could use the ELK(Elasticsearch, Logstash and Kibana) solution to provide a better visualization of logs, and perhaps metrics.
+
+- Create a queue(RabbitMQ or Kafka) to store logs in a safer way. A queue would also be useful to send notifications.
