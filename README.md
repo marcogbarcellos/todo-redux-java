@@ -42,5 +42,5 @@ For simplicity's sake a script called `run.sh` located in the main root was crea
 
 After that you'll be able to start, you can check the following links(if you keep the ports as the predefined ones):
 
-- Backend API Documentation: http://localhost:8080/api/v1/swagger-ui.html
-- Backend API Documentation: http://localhost:9000/
+- Backend - API Documentation: http://localhost:8080/api/v1/swagger-ui.html
+- Frontend - Todo React app: http://localhost:9000/
