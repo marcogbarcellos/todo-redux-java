@@ -1,0 +1,50 @@
+version: '2.1'
+
+services:
+  elasticsearch:
+    image: elasticsearch:5.4
+    volumes:
+      - ./docker/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=p4SSW0rd
+      - MYSQL_DATABASE=usercrud
+      - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=dbp4ss
+
+  server:
+    image: marcogbarcellos/todo:latest
+    depends_on:
+      - mysql
+      - elasticsearch
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_USER=dbuser
+      - DATABASE_PASSWORD=dbp4ss
+      - DATABASE_NAME=usercrud
+      - DATABASE_PORT=3306
+      - ELASTIC_SEARCH_URL=http://elasticsearch:9200/_bulk
+
+  client:
+    image: marcogbarcellos/todo-redux:latest
+    depends_on:
+      - server
+    command: npm start
+    volumes:
+        - ./client:/usr/src/app
+        # mount node_modules as a workaround for it disappearing
+        # after adding /client as a mounted folder
+        - /usr/src/app/node_modules
+    ports:
+        - "9000:3000"
+    environment:
+      - SERVER_PORT=8080
